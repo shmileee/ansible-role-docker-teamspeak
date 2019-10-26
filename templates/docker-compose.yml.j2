@@ -1,0 +1,32 @@
+# {{ ansible_managed }}
+version: '2'
+services:
+ teamspeak:
+  image: teamspeak
+  container_name: teamspeak_{{ item.server }}_ts3server
+  restart: {{ item.restart }}
+  ports:
+   - {{ item.voice_server_port }}:9987/udp
+   - {{ item.server_query_port }}:10011
+   - {{ item.file_transfer_port }}:30033
+  environment:
+   TS3SERVER_DB_PLUGIN: ts3db_mariadb
+   TS3SERVER_DB_SQLCREATEPATH: create_mariadb
+   TS3SERVER_DB_HOST: database
+   TS3SERVER_DB_USER: root
+   TS3SERVER_DB_PASSWORD: {{ item.database_password }}
+   TS3SERVER_DB_NAME: teamspeak
+   TS3SERVER_DB_WAITUNTILREADY: 30
+   TS3SERVER_LICENSE: accept
+  volumes:
+   - {{ docker_teamspeak_base_dir }}/{{ item.server }}/ts3server/:/var/ts3server/
+
+ database:
+  image: mariadb
+  container_name: teamspeak_{{ item.server }}_mariadb
+  restart: {{ item.restart }}
+  environment:
+   MYSQL_ROOT_PASSWORD: {{ item.database_password }}
+   MYSQL_DATABASE: teamspeak
+  volumes:
+   - {{ docker_teamspeak_base_dir }}/{{ item.server }}/database/:/var/lib/mysql

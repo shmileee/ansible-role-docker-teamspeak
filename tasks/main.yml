@@ -1,0 +1,24 @@
+---
+
+- name: Create folder structure
+  file:
+    path: "{{ docker_teamspeak_base_dir }}/{{ item[0].server }}/{{ item[1] }}"
+    state: directory
+  with_nested:
+    - "{{ docker_teamspeak_servers }}"
+    - ['database', 'ts3server']
+
+- name: write docker-compose files
+  template:
+    src: templates/docker-compose.yml.j2
+    dest: "{{ docker_teamspeak_base_dir }}/{{ item.server }}/docker-compose.yml"
+  with_items:
+    - "{{ docker_teamspeak_servers }}"
+
+- name: control container
+  docker_compose:
+    project_src: "{{ docker_teamspeak_base_dir }}/{{ item.server }}"
+    pull: "{{ docker_teamspeak_pull }}"
+    stopped: "{{ item.stopped }}"
+  with_items:
+    - "{{ docker_teamspeak_servers }}"

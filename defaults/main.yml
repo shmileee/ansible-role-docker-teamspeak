@@ -1,0 +1,17 @@
+---
+
+# basedir where the data and docker-compose files are stored
+docker_teamspeak_base_dir: /opt/teamspeak
+
+# always pull the images before starting
+docker_teamspeak_pull: yes
+
+# a default server instance
+docker_teamspeak_servers:
+  - server: default
+    voice_server_port: 9987
+    server_query_port: 10077
+    file_transfer_port: 30033
+    database_password: Up8ohv4reeboomo0thaitoosh
+    restart: always
+    stopped: no

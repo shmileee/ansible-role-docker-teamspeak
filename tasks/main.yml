@@ -1,5 +1,9 @@
 ---
 
+- name: flush handlers
+  meta: flush_handlers
+  when: docker_teamspeak_flush_handlers
+
 - name: Create folder structure
   file:
     path: "{{ docker_teamspeak_base_dir }}/{{ item[0].server }}/{{ item[1] }}"

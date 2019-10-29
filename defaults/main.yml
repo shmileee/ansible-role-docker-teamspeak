@@ -6,9 +6,6 @@ docker_teamspeak_base_dir: /opt/teamspeak
 # always pull the images before starting
 docker_teamspeak_pull: yes
 
-# flush handlers before
-docker_teamspeak_flush_handlers: yes
-
 # a default server instance
 docker_teamspeak_servers:
   - server: default

@@ -41,14 +41,6 @@ The role writes for every server in the list a folder structure as follows:
 ├── .../
 ```
 
-### Flush handler
-This options ensures by default, handlers to be run before this roles tasks.
-
-```yaml
-# flush handlers before
-docker_teamspeak_flush_handlers: yes
-```
-
 ### Docker specific
 ```yaml
 # always pull the images before starting

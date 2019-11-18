@@ -44,5 +44,5 @@ The role writes for every server in the list a folder structure as follows:
 ### Docker specific
 ```yaml
 # always pull the images before starting
-docker_teamspeak_pull: yes
+docker_teamspeak_pull: no
 ```
